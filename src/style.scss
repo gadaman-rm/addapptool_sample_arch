@@ -1,0 +1,72 @@
+@use "sass:map"; // Import the sass:map module
+
+// Define breakpoints for different screen sizes
+$breakpoints: (
+  mobile: 0px,
+  tablet: 768px,
+  laptop: 1024px,
+  desktop: 1200px,
+);
+
+// Mixin to handle media queries
+@mixin respond-to($size) {
+  @if map.has-key($breakpoints, $size) {
+    // Use map.has-key instead of map-has-key
+    @media (min-width: map.get($breakpoints, $size)) {
+      // Use map.get instead of map-get
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$size}.";
+  }
+}
+
+/* roboto-regular - cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/roboto-v47.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Russo One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/russo-one-v16.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-regular - arabic_cyrillic_cyrillic-ext_hebrew_latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/rubik-v28.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent; /* transparent with keyword */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  box-sizing: border-box;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+* {
+  box-sizing: border-box;
+}

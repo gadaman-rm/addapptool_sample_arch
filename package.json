@@ -1,0 +1,22 @@
+{
+  "name": "addapptool_sample_arch",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Addapptool Sample Architecture",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "devApp": "soft-knife develope",
+    "publishApp": "soft-knife run-script build && soft-knife access && soft-knife pack && soft-knife upload"
+  },
+  "devDependencies": {
+    "sass": "^1.89.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "lit": "^3.3.0"
+  }
+}

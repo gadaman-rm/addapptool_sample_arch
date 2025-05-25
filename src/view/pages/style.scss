@@ -1,0 +1,204 @@
+@use "sass:map"; // Import the sass:map module
+
+// Define breakpoints for different screen sizes
+$breakpoints: (
+  mobile: 0px,
+  tablet: 768px,
+  laptop: 1024px,
+  desktop: 1200px,
+);
+
+// Mixin to handle media queries
+@mixin respond-to($size) {
+  @if map.has-key($breakpoints, $size) {
+    // Use map.has-key instead of map-has-key
+    @media (min-width: map.get($breakpoints, $size)) {
+      // Use map.get instead of map-get
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$size}.";
+  }
+}
+
+/* roboto-regular - cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/roboto-v47.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Russo One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/russo-one-v16.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-regular - arabic_cyrillic_cyrillic-ext_hebrew_latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/rubik-v28.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+:root {
+  --text-direction: ltr;
+  --font-family: "Roboto", "Arial", "sans-serif";
+
+  --my-brand-font: var(--font-family);
+  --my-headline-font: var(--font-family);
+  --my-title-font: var(--font-family);
+  --my-plain-font: var(--font-family);
+  --md-ref-typeface-brand: var(--my-brand-font);
+  --md-ref-typeface-plain: var(--my-plain-font);
+
+  --md-sys-typescale-headline-font: var(--my-headline-font);
+  --md-sys-typescale-title-font: var(--my-title-font);
+
+  --md-sys-color-primary: #6750a4;
+  // --md-sys-color-on-primary: #FFFFFF;
+  // --md-sys-color-primary-container: #6FF7F6;
+  // --md-sys-color-on-primary-container: #002020;
+
+  --md-icon-color: var(--md-sys-color-primary);
+  --md-fab-icon-size: 32px;
+  --top-navigator-height: 50px;
+  --bottom-navigator-height: 50px;
+  --setting-tab-height: 50px;
+  @include respond-to(mobile) {
+    --top-navigator-height: 50px;
+    --navigation-icon-size: 32px;
+  }
+
+  // Styles for medium screens
+  @include respond-to(tablet) {
+    --top-navigator-height: 50px;
+    --navigation-icon-size: 32px;
+  }
+
+  // Styles for large screens
+  @include respond-to(laptop) {
+    --top-navigator-height: 70px;
+    --navigation-icon-size: 38px;
+  }
+
+  // Styles for extra large screens
+  @include respond-to(desktop) {
+    --top-navigator-height: 70px;
+    --navigation-icon-size: 38px;
+  }
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent; /* transparent with keyword */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  box-sizing: border-box;
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+* {
+  box-sizing: border-box;
+}
+.unselectable {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.clickAble {
+  cursor: pointer;
+}
+
+.appContainer {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.settingDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fef7ff;
+  position: fixed;
+  top: 0px;
+  z-index: 1000;
+  width: 100%;
+  height: var(--top-navigator-height);
+}
+
+.settingTabDiv {
+  top: var(--top-navigator-height);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  height: var(--setting-tab-height);
+  .settingTabs {
+    z-index: 100;
+  }
+}
+
+.settingTabContent {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: calc(var(--top-navigator-height) + var(--setting-tab-height));
+  z-index: 100;
+  height: calc(100vh - (var(--top-navigator-height) + var(--setting-tab-height) + var(--bottom-navigator-height)));
+  overflow: auto;
+}
+
+.fab {
+  position: fixed;
+  bottom: calc(var(--bottom-navigator-height) + 10px);
+  inset-inline-start: 10px;
+  z-index: 1000;
+}
+
+.settingIcon {
+  color: var(--md-icon-color);
+  --md-icon-size: var(--navigation-icon-size);
+  margin: 2px;
+  cursor: pointer;
+}
+
+.bottomNavigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  height: var(--bottom-navigator-height);
+  bottom: 0px;
+  width: 100%;
+  background-color: #fef7ff;
+  z-index: 100;
+}
+
+md-icon[filled] {
+  font-variation-settings: "FILL" 1;
+}
